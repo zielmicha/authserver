@@ -1,0 +1,4 @@
+Django==1.7.2
+argparse==1.2.1
+django-grappelli==2.6.3
+wsgiref==0.1.2
