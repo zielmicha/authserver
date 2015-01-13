@@ -1,4 +1,6 @@
 Django==1.7.2
 argparse==1.2.1
+django-annoying==0.8.0
 django-grappelli==2.6.3
+shortuuid==0.4.2
 wsgiref==0.1.2

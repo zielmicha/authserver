@@ -42,7 +42,7 @@ def users(request):
             'uid': settings.BASE_UID + user.id,
             'gid': settings.DEFAULT_GID,
             'home': settings.HOMEDIR_PATTERN % user.username,
-            'shell': settings.DEFAULT_SHELL,
+            'shell': user.posix_user.shell,
             'gecos': user.first_name + ' ' + user.last_name
         })
 
