@@ -27,6 +27,21 @@ parser.addArgument(
     {help: 'users list cache TTL (0 for unlimited)', defaultValue: 5}
 )
 
+parser.addArgument(
+    ['-u', '--uid'],
+    {help: 'setuid to user'}
+)
+
+parser.addArgument(
+    ['-g', '--gid'],
+    {help: 'setgid to group'}
+)
+
+parser.addArgument(
+    ['-p', '--port'],
+    {help: 'port to listen on', defaultValue: 389}
+)
+
 var options = parser.parseArgs();
 
 function authorize(req, res, next) {
@@ -154,7 +169,15 @@ server.search(options.root_dn, pre, function(req, res, next) {
   return next();
 });
 
-// LDAP "standard" listens on 389, but whatever.
-server.listen(1389, '0.0.0.0', function() {
-  console.log('%s auth LDAP server at: %s', options.api_url, server.url);
+server.listen(options.port, '0.0.0.0', function() {
+    try {
+        if(options.gid)
+            process.setgid(options.gid);
+        if(options.uid)
+            process.setuid(options.uid);
+    } catch(err) {
+        console.log('setuid/setgid failed');
+        process.exit(1);
+    }
+    console.log('%s auth LDAP server at: %s', options.api_url, server.url);
 });
