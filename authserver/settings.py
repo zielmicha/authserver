@@ -89,4 +89,4 @@ DEFAULT_GID = 1000
 HOMEDIR_PATTERN = '/home/%s'
 DEFAULT_SHELL = '/bin/bash'
 
-execfile(BASE + '/authserver/local_settings.py')
+execfile(BASE_DIR + '/authserver/local_settings.py')
