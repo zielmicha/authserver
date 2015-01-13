@@ -44,13 +44,6 @@ parser.addArgument(
 
 var options = parser.parseArgs();
 
-function authorize(req, res, next) {
-    if (!req.connection.ldap.bindDN.equals('cn=root'))
-        return next(new ldap.InsufficientAccessRightsError());
-
-    return next();
-}
-
 function loadUserList(req, res, next) {
     if(cache != null && ((new Date).getTime() - cachedDate) < options.ttl * 1000) {
         req.users = cache.users;
@@ -119,7 +112,7 @@ function loadUserList(req, res, next) {
 }
 
 
-var pre = [authorize, loadUserList];
+var pre = [loadUserList];
 
 var server = ldap.createServer();
 
