@@ -45,9 +45,15 @@ def set_password(token):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument('--port', default=7890)
+    parser.add_argument('--uid', type=int)
+    parser.add_argument('--gid', type=int)
     parser.add_argument('--host', default='localhost')
     parser.add_argument('--api-url', required=True)
     parser.add_argument('--debug', action='store_true', default=False)
     parser.add_argument('--redirect-url', required=True)
     args = parser.parse_args()
+    if args.gid:
+        os.setgid(args.gid)
+    if args.uid:
+        os.setuid(args.uid)
     app.run(host=args.host, port=args.port, debug=args.debug)
