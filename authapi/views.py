@@ -1,8 +1,9 @@
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_http_methods
-from django.http import HttpResponseForbidden, JsonResponse, HttpResponse
+from django.http import JsonResponse, HttpResponse
 from django.conf import settings
 from django.contrib.auth import models as auth_models
+from django.contrib.auth import authenticate
 
 from . import models
 
@@ -53,4 +54,13 @@ def users(request):
 @require_http_methods(['POST'])
 @apiauth
 def auth(request):
-    pass
+    name = request.POST['name']
+    password = request.POST['password']
+    user = authenticate(username=name, password=password)
+
+    if not user:
+        return JsonResponse({'status': 'invalid_login'})
+    if not user.is_active:
+        return JsonResponse({'status': 'user_inactive'})
+
+    return JsonResponse({'status': 'ok'})

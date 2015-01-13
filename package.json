@@ -1,0 +1,15 @@
+{
+    "name": "authserver-ldapd",
+    "version": "0.0.1",
+    "description": "LDAP server for authserver",
+    "keywords": [],
+    "license": "Apache-2.0",
+    "author": {"name": "Michał Zieliński", "email": "michal@zielinscy.org.pl", "url": "http://zielmicha.com"},
+    "bin": {"authserver-ldapd": "./passwd.js"},
+    "repository": {"type": "git", "url": "https://github.com/zielmicha/authserver.git"},
+    "dependencies": {
+        "ldapjs": ">=0.7.1",
+        "request": "^2.51.0",
+        "argparse": ">=0.1.16"
+    }
+}
