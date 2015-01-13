@@ -84,6 +84,7 @@ function loadUserList(req, res, next) {
                         description: record.gecos,
                         homedirectory: record.home,
                         loginshell: record.shell || '',
+                        mail: record.mail,
 
                         objectclass: ['top', 'posixAccount', 'person']
                     }

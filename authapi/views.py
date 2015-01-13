@@ -43,7 +43,8 @@ def users(request):
             'gid': settings.DEFAULT_GID,
             'home': settings.HOMEDIR_PATTERN % user.username,
             'shell': user.posix_user.shell,
-            'gecos': user.first_name + ' ' + user.last_name
+            'gecos': user.first_name + ' ' + user.last_name,
+            'mail': user.email,
         })
 
     return JsonResponse(
