@@ -85,6 +85,8 @@ function loadUserList(req, res, next) {
                         homedirectory: record.home,
                         loginshell: record.shell || '',
                         mail: record.mail,
+                        givenName: record.givenName,
+                        sn: record.sn,
 
                         objectclass: ['top', 'posixAccount', 'person']
                     }

@@ -45,6 +45,8 @@ def users(request):
             'shell': user.posix_user.shell,
             'gecos': user.first_name + ' ' + user.last_name,
             'mail': user.email,
+            'givenName': user.first_name,
+            'sn': user.last_name
         })
 
     return JsonResponse(
